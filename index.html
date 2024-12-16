@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>窝居•ᴗ•2024年圣诞快乐</title>
+    <style>
+        /* 设置页面主体的背景颜色为黑色 */
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 160vw; /* 根据9:16的比例设置高度，1vw表示视口宽度的1% */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: fadeIn 1s linear forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+     <audio src="https://telegraph-img-by-bot.pages.dev/file/1734365637453_Last Christmas.mp3"  autoplay="autoplay" loop="loop"></audio>
+
+    <img src="https://telegraph-img-by-bot.pages.dev/file/1734364362450_Mainpage.png" alt="Mainpage.png" width="100%">
+    <script>
+        // 获取音频元素
+        var audio = document.getElementById('myAudio');
+        // 隐藏音频播放器的默认界面（不同浏览器对隐藏音频元素的默认界面支持情况略有不同，但基本能实现隐藏效果）
+        audio.style.display = 'none';
+    </script>
+</body>
+
+</html>
