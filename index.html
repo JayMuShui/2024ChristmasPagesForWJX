@@ -34,19 +34,37 @@
                 opacity: 1;
             }
         }
+
+        /* 媒体查询，针对电脑端屏幕宽度大于768px的情况 */
+        @media screen and (min-width: 768px) {
+           .message {
+                font-family: "宋体";
+                color: white;
+                font-size: 24px;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
 <body>
-
-     <audio src="https://telegraph-img-by-bot.pages.dev/file/1734365637453_Last Christmas.mp3"  autoplay="autoplay" loop="loop"></audio>
-
+    <audio src="https://telegraph-img-by-bot.pages.dev/file/1734367231325_Last Christmas.mp3" autoplay="autoplay" loop="loop"></audio>
     <img src="https://telegraph-img-by-bot.pages.dev/file/1734364362450_Mainpage.png" alt="Mainpage.png" width="100%">
     <script>
         // 获取音频元素
-        var audio = document.getElementById('myAudio');
+        var audio = document.querySelector('audio');
         // 隐藏音频播放器的默认界面（不同浏览器对隐藏音频元素的默认界面支持情况略有不同，但基本能实现隐藏效果）
         audio.style.display = 'none';
+    </script>
+    <!-- 用于显示提示信息的元素，初始隐藏，在电脑端通过媒体查询来控制显示 -->
+    <div class="message" style="display: none;">请用手机访问这个礼物</div>
+    <script>
+        // 通过JavaScript判断屏幕宽度，来控制提示信息的显示与否
+        window.onload = function () {
+            if (window.innerWidth > 768) {
+                document.querySelector('.message').style.display = 'block';
+            }
+        };
     </script>
 </body>
 
