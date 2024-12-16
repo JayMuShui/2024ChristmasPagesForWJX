@@ -15,17 +15,21 @@
             height: 160vw; /* 根据9:16的比例设置高度，1vw表示视口宽度的1% */
             overflow: hidden;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
+            /* 将指定图片设置为背景图，并让其按比例铺满整个页面 */
+            background-image: url("https://telegraph-img-by-bot.pages.dev/file/1734364362450_Mainpage.png");
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease; /* 添加背景图片切换的过渡效果，持续0.5秒，缓动过渡 */
         }
 
         img {
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            animation: fadeIn 1s linear forwards;
+            display: none;
         }
 
+        /* 图片渐显动画关键帧 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -35,36 +39,136 @@
             }
         }
 
-        /* 媒体查询，针对电脑端屏幕宽度大于768px的情况 */
-        @media screen and (min-width: 768px) {
-           .message {
-                font-family: "宋体";
-                color: white;
-                font-size: 24px;
-                text-align: center;
+        /* 应用图片渐显动画到body元素，模拟图片渐显效果 */
+        body {
+            animation: fadeIn 1s linear forwards;
+        }
+
+        /* 按钮通用样式 */
+        button {
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeAndShake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+            animation-delay: 1s;
+            font-size: 24px;
+            color: white;
+            background-color: transparent;
+        }
+
+        /* 第一个按钮特定样式，添加悬停效果，鼠标悬停时稍微放大并添加白色边框 */
+        button#btn1 {
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        button#btn1:hover {
+            transform: scale(1.2);
+        }
+
+        /* 第二个按钮特定样式，添加悬停效果，鼠标悬停时稍微放大并添加白色边框 */
+        button#btn2 {
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        button#btn2:hover {
+            transform: scale(1.2);
+        }
+
+        /* 第三个按钮特定样式，添加悬停效果，鼠标悬停时稍微放大并添加白色边框 */
+        button#btn3 {
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        button#btn3:hover {
+            transform: scale(1.2);
+        }
+
+        /* 定义按钮渐显并摇动的动画关键帧 */
+        @keyframes fadeAndShake {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) rotate(0deg);
             }
+            50% {
+                opacity: 1;
+                transform: translateY(-5px) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* 固定按钮容器在视口底部的样式 */
+      .button-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 
 <body>
     <audio src="https://telegraph-img-by-bot.pages.dev/file/1734367231325_Last Christmas.mp3" autoplay="autoplay" loop="loop"></audio>
-    <img src="https://telegraph-img-by-bot.pages.dev/file/1734364362450_Mainpage.png" alt="Mainpage.png" width="100%">
     <script>
         // 获取音频元素
         var audio = document.querySelector('audio');
         // 隐藏音频播放器的默认界面（不同浏览器对隐藏音频元素的默认界面支持情况略有不同，但基本能实现隐藏效果）
         audio.style.display = 'none';
     </script>
-    <!-- 用于显示提示信息的元素，初始隐藏，在电脑端通过媒体查询来控制显示 -->
-    <div class="message" style="display: none;">请用手机访问这个礼物</div>
+    <div class="button-container">
+        <!-- 第一个按钮，用于切换背景图片 -->
+        <button id="btn1">🎁</button>
+        <!-- 第二个按钮，跳转到github.com/JayMuShui/WJX-ChristmasGreet2024 -->
+        <button id="btn2">⚙️</button>
+        <!-- 第三个按钮，跳转到jaymushui.github.io -->
+        <button id="btn3">🔗</button>
+    </div>
     <script>
-        // 通过JavaScript判断屏幕宽度，来控制提示信息的显示与否
-        window.onload = function () {
-            if (window.innerWidth > 768) {
-                document.querySelector('.message').style.display = 'block';
+        // 获取三个按钮元素
+        var btn1 = document.getElementById('btn1');
+        var btn2 = document.getElementById('btn2');
+        var btn3 = document.getElementById('btn3');
+
+        // 用于记录当前背景图片状态，true表示显示Mainpage图片，false表示显示Explain图片
+        var isMainpageBg = true;
+
+        // 第一个按钮点击事件处理函数，切换背景图片
+        btn1.addEventListener('click', function () {
+            var body = document.body;
+            if (isMainpageBg) {
+                body.style.backgroundImage = "url('https://telegraph-img-by-bot.pages.dev/file/1734364363549_Explain.png')";
+            } else {
+                body.style.backgroundImage = "url('https://telegraph-img-by-bot.pages.dev/file/1734364362450_Mainpage.png')";
             }
-        };
+            isMainpageBg =!isMainpageBg;
+        });
+
+        // 第二个按钮点击事件处理函数，跳转到github.com/JayMuShui/WJX-ChristmasGreet2024
+        btn2.addEventListener('click', function () {
+            window.location.href = "https://github.com/JayMuShui/WJX-ChristmasGreet2024";
+        });
+
+        // 第三个按钮点击事件处理函数，跳转到jaymushui.github.io
+        btn3.addEventListener('click', function () {
+            window.location.href = "https://jaymushui.github.io";
+        });
     </script>
 </body>
 
